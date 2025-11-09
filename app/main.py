@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.core.db import db
+from app.api import clientes, tarjetas, cobros
 
 
 app = FastAPI(
@@ -21,7 +22,6 @@ def startup_event():
 async def read_root():
     return {"message": "Bienvenido a la API de Cobros Simulados"}
 
-# from app.api import clientes, tarjetas, cobros
-# app.include_router(clientes.router, prefix="/clientes", tags=["Clientes"])
-# app.include_router(tarjetas.router, prefix="/tarjetas", tags=["Tarjetas"])
-# app.include_router(cobros.router, prefix="/cobros", tags=["Cobros"])
+app.include_router(clientes.router, prefix="/clientes", tags=["Clientes"])
+app.include_router(tarjetas.router, prefix="/tarjetas", tags=["Tarjetas"])
+app.include_router(cobros.router, prefix="/cobros", tags=["Cobros"])
