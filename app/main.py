@@ -1,0 +1,27 @@
+from fastapi import FastAPI
+from app.core.db import db
+
+
+app = FastAPI(
+    title="API de Cobros Simulados",
+    description="Prueba Técnica para simular un CRUD de cobros. [cite: 1, 2]",
+    version="1.0.0"
+)
+
+
+@app.on_event("startup")
+def startup_event():
+    if db is None:
+        print("ERROR: No se pudo conectar a la base de datos.")
+    else:
+        print("La aplicación ha iniciado y la conexión a DB está lista.")
+
+
+@app.get("/", tags=["Root"])
+async def read_root():
+    return {"message": "Bienvenido a la API de Cobros Simulados"}
+
+# from app.api import clientes, tarjetas, cobros
+# app.include_router(clientes.router, prefix="/clientes", tags=["Clientes"])
+# app.include_router(tarjetas.router, prefix="/tarjetas", tags=["Tarjetas"])
+# app.include_router(cobros.router, prefix="/cobros", tags=["Cobros"])
