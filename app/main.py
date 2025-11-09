@@ -20,6 +20,9 @@ def startup_event():
 
 @app.get("/", tags=["Root"])
 async def read_root():
+    """
+    Endpoint raíz para verificar que la API está funcionando.
+    """
     return {"message": "Bienvenido a la API de Cobros Simulados"}
 
 app.include_router(clientes.router, prefix="/clientes", tags=["Clientes"])
