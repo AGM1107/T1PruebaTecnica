@@ -1,3 +1,13 @@
-.idea
-test_main.http
-.venv
+# Entorno virtual
+venv/
+.venv/
+
+# Caché de Python
+__pycache__/
+*.pyc
+
+# Caché de Pytest
+.pytest_cache/
+
+# Archivos de IDE (PyCharm)
+.idea/
