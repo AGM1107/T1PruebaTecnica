@@ -16,10 +16,10 @@ clientes_collection = "clientes"
 @router.post("/", response_model=Tarjeta, status_code=status.HTTP_201_CREATED, summary="Registrar una tarjeta de prueba")
 async def create_tarjeta(tarjeta_in: TarjetaCreate = Body(...)):
     """
-    [cite_start]Registra una nueva tarjeta de prueba para un cliente[cite: 23].
+    Registra una nueva tarjeta de prueba para un cliente.
 
-    - [cite_start]Valida el PAN completo usando el algoritmo de Luhn[cite: 23].
-    - [cite_start]NO guarda el PAN completo, solo el 'bin', 'last4' y 'pan_masked'[cite: 14, 16, 24].
+    - Valida el PAN completo usando el algoritmo de Luhn.
+    - NO guarda el PAN completo, solo el 'bin', 'last4' y 'pan_masked'.
     """
     if not validate_luhn(tarjeta_in.pan_completo):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="El número de tarjeta (PAN) no es válido según el algoritmo de Luhn.")
@@ -56,7 +56,7 @@ async def create_tarjeta(tarjeta_in: TarjetaCreate = Body(...)):
 @router.get("/{id}", response_model=Tarjeta, status_code=status.HTTP_200_OK, summary="Obtener una tarjeta por ID")
 async def get_tarjeta_by_id(id: str = Path(..., alias="id")):
     """
-    [cite_start]Obtiene los detalles de una tarjeta (enmascarada) por su ID[cite: 25].
+    Obtiene los detalles de una tarjeta (enmascarada) por su ID.
     """
     try:
         object_id = ObjectId(id)
@@ -74,8 +74,7 @@ async def get_tarjeta_by_id(id: str = Path(..., alias="id")):
 @router.put("/{id}",response_model=Tarjeta, status_code=status.HTTP_200_OK, summary="Actualizar metadatos de una tarjeta (si aplica)")
 async def update_tarjeta(id: str = Path(..., alias="id"), update_data: TarjetaUpdate = Body(...)):
     """
-    Actualiza metadatos de una tarjeta. El PDF especifica
-    [cite_start]que el PAN completo no debe ser actualizable[cite: 26].
+    Actualiza metadatos de una tarjeta. El PDF especifica que el PAN completo no debe ser actualizable.
     """
     try:
         object_id = ObjectId(id)
@@ -102,7 +101,7 @@ async def update_tarjeta(id: str = Path(..., alias="id"), update_data: TarjetaUp
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT, summary="Eliminar una tarjeta por ID")
 async def delete_tarjeta(id: str = Path(..., alias="id")):
     """
-    [cite_start]Elimina una tarjeta de la base de datos[cite: 27].
+    Elimina una tarjeta de la base de datos.
     """
     try:
         object_id = ObjectId(id)

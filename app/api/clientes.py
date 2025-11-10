@@ -14,7 +14,7 @@ collection = "clientes"
 @router.post("/", response_model=Cliente, status_code=status.HTTP_201_CREATED, summary="Crear un nuevo cliente")
 async def create_cliente(cliente: ClienteBase = Body(...)):
     """
-    [cite_start]Crea un nuevo cliente en la base de datos[cite: 19].
+    Crea un nuevo cliente en la base de datos.
     """
     try:
         cliente_dict = cliente.model_dump()
@@ -33,7 +33,7 @@ async def create_cliente(cliente: ClienteBase = Body(...)):
 @router.get("/{id}", response_model=Cliente, status_code=status.HTTP_200_OK, summary="Obtener un cliente por ID")
 async def get_cliente_by_id(id: str = Path(..., alias="id")):
     """
-    [cite_start]Obtiene los detalles de un cliente específico por su ID[cite: 20].
+    Obtiene los detalles de un cliente específico por su ID.
     """
     try:
         object_id = ObjectId(id)
@@ -51,7 +51,7 @@ async def get_cliente_by_id(id: str = Path(..., alias="id")):
 @router.put("/{id}", response_model=Cliente, status_code=status.HTTP_200_OK, summary="Actualizar un cliente por ID")
 async def update_cliente(id: str = Path(..., alias="id"), update_data: ClienteUpdate = Body(...)):
     """
-    [cite_start]Actualiza la información de un cliente existente[cite: 21].
+    Actualiza la información de un cliente existente.
     """
     try:
         object_id = ObjectId(id)
@@ -81,7 +81,7 @@ async def update_cliente(id: str = Path(..., alias="id"), update_data: ClienteUp
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT, summary="Eliminar un cliente por ID")
 async def delete_cliente(id: str = Path(..., alias="id")):
     """
-    [cite_start]Elimina un cliente de la base de datos[cite: 21].
+    Elimina un cliente de la base de datos.
     """
     try:
         object_id = ObjectId(id)

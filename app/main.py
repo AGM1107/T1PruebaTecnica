@@ -5,7 +5,7 @@ from app.api import clientes, tarjetas, cobros
 
 app = FastAPI(
     title="API de Cobros Simulados",
-    description="Prueba Técnica para simular un CRUD de cobros. [cite: 1, 2]",
+    description="Prueba Técnica para simular un CRUD de cobros.",
     version="1.0.0"
 )
 

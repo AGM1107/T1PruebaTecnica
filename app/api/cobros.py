@@ -36,8 +36,7 @@ async def create_cobro(cobro_in: CobroCreate = Body(...)):
     """
     Realiza un cobro simulado sobre una tarjeta de prueba.
 
-    Aplica las reglas de negocio (aprobación/rechazo) definidas
-    basadas en los 'last4' de la tarjeta.
+    Aplica las reglas de negocio (aprobación/rechazo) definidas basadas en los 'last4' de la tarjeta.
     """
     try:
         tarjeta_oid = ObjectId(cobro_in.tarjeta_id)
@@ -107,8 +106,7 @@ async def create_reembolso(cobro_id: str = Path(..., alias="cobro_id")):
 @router.get("/{cliente_id}", response_model=List[Cobro], status_code=status.HTTP_200_OK, summary="Obtener historial de cobros por cliente")
 async def get_historial_por_cliente(cliente_id: str = Path(..., alias="cliente_id")):
     """
-    Consulta todo el historial de cobros (aprobados, declinados y
-    reembolsados) para un cliente específico.
+    Consulta todo el historial de cobros (aprobados, declinados y reembolsados) para un cliente específico.
     """
     try:
         cliente_oid = ObjectId(cliente_id)
