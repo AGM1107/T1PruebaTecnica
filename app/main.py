@@ -1,21 +1,22 @@
 from fastapi import FastAPI
 from app.core.db import db
 from app.api import clientes, tarjetas, cobros
+from contextlib import asynccontextmanager
 
 
-app = FastAPI(
-    title="API de Cobros Simulados",
-    description="Prueba Técnica para simular un CRUD de cobros.",
-    version="1.0.0"
-)
-
-
-@app.on_event("startup")
-def startup_event():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     if db is None:
         print("ERROR: No se pudo conectar a la base de datos.")
     else:
         print("La aplicación ha iniciado y la conexión a DB está lista.")
+
+    yield
+
+    print("La aplicación se ha detenido.")
+
+
+app = FastAPI(title="API de Cobros Simulados", description="Prueba Técnica para simular un CRUD de cobros.", version="1.0.0", lifespan=lifespan)
 
 
 @app.get("/", tags=["Root"])
